@@ -176,6 +176,26 @@ class TemplateUtility extends AbstractUtility
     }
 
     /**
+     * This functions renders the powermail_opt_in_link Template for the optin Mail
+     *
+     * @param Mail $mail
+     * @param string $hash
+     * @param array $settings TypoScript Settings
+     */
+    public static function powermailOptInLink(Mail $mail)
+    {
+        $standaloneView = self::getDefaultStandAloneView();
+        $standaloneView->setTemplatePathAndFilename(self::getTemplatePath('Form/PowermailOptInLink.html'));
+        $standaloneView->assignMultiple(
+            [
+                'mail' => $mail,
+                'hash' => OptinUtility::createOptinHash($mail)
+            ]
+        );
+        return $standaloneView->render();
+    }
+
+    /**
      * Parse String with Fluid View
      *
      * @param string $string Any string

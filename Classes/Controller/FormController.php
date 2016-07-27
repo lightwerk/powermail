@@ -331,19 +331,32 @@ class FormController extends AbstractController
                 [$this->conf['sender.']['default.'], 'senderName']
             ),
             'receiverEmail' => $this->mailRepository->getSenderMailFromArguments($mail),
-            'senderName' => $this->settings['sender']['name'],
-            'senderEmail' => $this->settings['sender']['email'],
-            'subject' => $this->contentObject->cObjGetSingle(
-                $this->conf['optin.']['subject'],
-                $this->conf['optin.']['subject.']
-            ),
-            'rteBody' => '',
+            'senderName' => $this->settings['optin']['name'],
+            'senderEmail' => $this->settings['optin']['email'],
+            'subject' => $this->settings['optin']['subject'],
+            'rteBody' => $this->settings['optin']['body'],
             'format' => $this->settings['sender']['mailformat'],
             'variables' => [
                 'hash' => OptinUtility::createOptinHash($mail),
                 'mail' => $mail
             ]
         ];
+        // Compatibility
+        if (trim($this->settings['optin']['subject']) === '') {
+            $email['subject'] = $this->contentObject->cObjGetSingle(
+                $this->conf['optin.']['subject'],
+                $this->conf['optin.']['subject.']
+            );
+        }
+        if (trim($this->settings['optin']['senderName']) === '') {
+            $email['senderName'] = $this->settings['sender']['name'];
+        }
+        if (trim($this->settings['optin']['senderEmail']) === '') {
+            $email['senderEmail'] = $this->settings['sender']['email'];
+        }
+        if (trim($this->settings['optin']['body']) === '' || trim($this->settings['optin']['body']) === '{powermail_opt_in_link}') {
+            $email['rteBody'] = '';
+        }
         TypoScriptUtility::overwriteValueFromTypoScript(
             $email['receiverName'],
             $this->conf['optin.']['overwrite.'],
@@ -364,6 +377,7 @@ class FormController extends AbstractController
             $this->conf['optin.']['overwrite.'],
             'senderEmail'
         );
+
         $this->sendMailService->sendEmailPreflight($email, $mail, $this->settings, 'optin');
     }
 

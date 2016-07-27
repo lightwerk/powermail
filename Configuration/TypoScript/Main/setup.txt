@@ -284,6 +284,14 @@ plugin.tx_powermail {
 			}
 
 			optin {
+
+				# Following settings are normally set via Flexform
+				name =
+				email =
+				subject =
+				body =
+
+				# Fallback
 				subject = TEXT
 				subject.data = LLL:EXT:powermail/Resources/Private/Language/locallang.xlf:optin_subject
 

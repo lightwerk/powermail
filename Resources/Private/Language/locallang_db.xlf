@@ -489,6 +489,21 @@
 			<trans-unit id="flexform.sender.body">
 				<source>Bodytext for Email to Sender</source>
 			</trans-unit>
+			<trans-unit id="flexform.optin">
+				<source>OptIn Mail to User</source>
+			</trans-unit>
+			<trans-unit id="flexform.optin.email">
+				<source>Sender Email (For OptIn Mail to User)</source>
+			</trans-unit>
+			<trans-unit id="flexform.optin.name">
+				<source>Sender Name (For OptIn Mail to User)</source>
+			</trans-unit>
+			<trans-unit id="flexform.optin.subject">
+				<source>Subject for OptIn-Email to Sender (Empty subject sends default OptIn-Mail)</source>
+			</trans-unit>
+			<trans-unit id="flexform.optin.body">
+				<source>Bodytext for OptIn-Email to Sender</source>
+			</trans-unit>
 			<trans-unit id="flexform.thx">
 				<source>Submit Page</source>
 			</trans-unit>
