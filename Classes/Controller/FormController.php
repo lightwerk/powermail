@@ -341,6 +341,7 @@ class FormController extends AbstractController
                 'mail' => $mail
             ]
         ];
+
         // Compatibility
         if (trim($this->settings['optin']['subject']) === '') {
             $email['subject'] = $this->contentObject->cObjGetSingle(
@@ -348,10 +349,10 @@ class FormController extends AbstractController
                 $this->conf['optin.']['subject.']
             );
         }
-        if (trim($this->settings['optin']['senderName']) === '') {
+        if (trim($this->settings['optin']['name']) === '') {
             $email['senderName'] = $this->settings['sender']['name'];
         }
-        if (trim($this->settings['optin']['senderEmail']) === '') {
+        if (trim($this->settings['optin']['email']) === '') {
             $email['senderEmail'] = $this->settings['sender']['email'];
         }
         if (trim($this->settings['optin']['body']) === '' || trim($this->settings['optin']['body']) === '{powermail_opt_in_link}') {
